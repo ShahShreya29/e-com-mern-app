@@ -6,6 +6,19 @@ const Delivery = () => {
 
   const handleSubmit = (e) => {
 e.preventdefault()
+console.log("address");
+const data = new FormData(e.currentTarget);
+console.log(data);
+const address={
+  name: data.get("name"),
+  Address: data.get("address"),
+  city:data.get("city"),
+  state:data.get("state"),
+  zipCode:data.get("zipCode"),
+  Number:data.get("mobileNo")
+
+
+}
   };
 
   return (
@@ -21,7 +34,7 @@ e.preventdefault()
 
           <Grid item xs={12} lg={7}>
             <Box className="p-5">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={6}>
                     <TextField required id="Name" name="Name" label="Name" />
@@ -70,6 +83,6 @@ e.preventdefault()
       </div>
     </>
   );
-};
+}; 
 
 export default Delivery;

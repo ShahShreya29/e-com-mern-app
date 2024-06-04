@@ -5,20 +5,31 @@ import Navigation from "./Components/Navigation/Navigation";
 import Products from "./Components/Product/Products";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import HomePage from "./Pages/HomePage/HomePage";
-import CheckOut from './Components/CheckOut/CheckOut'
+import CheckOut from "./Components/CheckOut/CheckOut";
+import { Routes, Route } from "react-router-dom";
+import OrderDetails from "./Components/CheckOut/OrderDetails";
+import orderList from "./Components/CheckOut/orderList";
+
 
 function App() {
   return (
     <>
-      <Navigation />
       <div>
-        {/* <HomePage /> */}
-        {/* <Products /> */}
-        {/* <ProductDetails/> */}
-        {/* <Cart/> */}
-        <CheckOut/>
+        <Navigation />
       </div>
-      <Footer/>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/:levelOne/:levelTwo/:levelThree" element={<Products />} />
+        <Route path="/product/productId" element={<ProductDetails />} />
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/account/order" element={<orderList />} />
+        <Route path="/account/order/:orderId" element={<OrderDetails />} />
+      </Routes>
+
+      <div>
+        <Footer />
+      </div>
     </>
   );
 }

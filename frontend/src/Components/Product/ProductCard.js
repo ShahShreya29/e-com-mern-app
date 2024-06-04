@@ -6,11 +6,16 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import './ProductCard.css'                          
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({product}) {
+  
+  const navigate = useNavigate();
+
   return (
+
       <>
-    <Card sx={{ maxWidth: 245, margin: 5, cursor: "pointer"}} className="Card">
+    <Card onClick={()=>navigate(`/Product/${2}`)} sx={{ maxWidth: 245, margin: 5, cursor: "pointer"}} className="Card">
     
       <CardMedia
         sx={{ height: 340}}

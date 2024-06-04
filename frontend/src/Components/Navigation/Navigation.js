@@ -20,6 +20,7 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { useNavigation } from "react-router-dom";
 
 const navigation = {
   categories: [
@@ -157,6 +158,12 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigation("");
+
+  const handleCategory = (category, section, item, close) => {
+    navigate(`/${category.id}/${section.id}/${item.id}`);
+    close();
+  };
 
   return (
     <div className="bg-white">
@@ -266,13 +273,20 @@ export default function Navigation() {
                               className="mt-6 flex flex-col space-y-6"
                             >
                               {section.items.map((item) => (
-                                <li key={item.name} className="flow-root">
-                                  <a
-                                    href={item.href}
-                                    className="-m-2 block p-2 text-gray-500"
+                                <li key={item.name} className="flex">
+                                  <p
+                                    onClick={() =>
+                                      handleCategory(
+                                        category,
+                                        section,
+                                        item,
+                                        // close
+                                      )
+                                    }
+                                    className="-m-2 block p-2 text-gray-500 cursor-pointer"
                                   >
                                     {item.name}
-                                  </a>
+                                  </p>
                                 </li>
                               ))}
                             </ul>
@@ -313,20 +327,6 @@ export default function Navigation() {
                       Create account
                     </a>
                   </div>
-                </div>
-
-                <div className="border-t border-gray-200 px-4 py-6">
-                  <a href="#" className="-m-2 flex items-center p-2">
-                    <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-base font-medium text-gray-900">
-                      CAD
-                    </span>
-                    <span className="sr-only">, change currency</span>
-                  </a>
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -500,21 +500,6 @@ export default function Navigation() {
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     Create account
-                  </a>
-                </div>
-
-                <div className="hidden lg:ml-8 lg:flex">
-                  <a
-                    href="#"
-                    className="flex items-center text-gray-700 hover:text-gray-800"
-                  >
-                    <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-sm font-medium">CAD</span>
-                    <span className="sr-only">, change currency</span>
                   </a>
                 </div>
 
