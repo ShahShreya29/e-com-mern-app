@@ -1,0 +1,45 @@
+Write a E-commerce application. Key Components for this tasks are:  Due Date - 7th June 2024
+    a) User Interface (UI) Design
+    b) Responsive Design
+    c) Product Management based on categories (inventory management)
+    d) User Authentication and Authorization
+    e) Shopping Cart and Checkout Process
+    f) Order Management:
+    g) Search and Filtering Functionality
+This project should contain eslint, sonarQube, redis (if required), deployments, websockets, jwt
+
+setup sonarQube and eslint for mernStack project
+
+eslint ==>  https://youtu.be/8Lxf1cP59Os?si=pecZI30ixFRIh8WN
+             https://youtu.be/x8m07tQRClM?si=YUk_VMcT3ZggULMH
+
+sonarQube ==> https://youtu.be/6vdRvz_LnbQ?si=KwH5dyPNl4uOVkEx
+add=> https://youtu.be/bK8-ZF2ImUc?si=SCUoRwKy-udNbyBS
+https://youtu.be/r2UVTDpIUj8?si=AZdcIDEZM6nHCQH2
+
+App ==> https://youtu.be/glMRU2ER1q8?si=78NDyyfV_lY0itUU
+ ==>https://youtu.be/LH-S5v-D3hA?si=3FS9iwrGR8f4Qo9Y
+sonarQube Steps:
+
+Open terminal
+1) docker pull sonarqube
+2) docker run -d --name sonarqube-db -e POSTGRES_USER=sonar -e POSTGRES_PASSWORD=sonar -e POSTGRES_DB=sonarqube postgres:alpine
+3) docker run -d --name sonarqube -p 9000:9000 --link sonarqube-db:db -e SONAR_JDBC_URL=jdbc:postgresql://db:5432/sonarqube -e SONAR_JDBC_USERNAME=sonar -e SONAR_JDBC_PASSWORD=sonar sonarqube
+
+docker ps command -> check container
+
+name
+lil's Cuties
+lil's Angle
+Love of Fashion          
+Fashionista
+GlamoursGals
+FashionFairy
+
+
+Images ==> https://www.google.com/search?q=girls%20fashion%20poster&udm=2&uds=ADvngMg6Q0mwSNoULKN8tZh6vlSyTpTK5inzZAUgd6JsQ1OV4Scs27FSbZp7GRanKKwWi6Qw56kc&tbs=rimg:CbEJSfgWkAerYeiUkQZ85RiNsgIAwAIA2AIA4AIA&hl=en&sa=X&ved=0CCUQuIIBahcKEwjoiN-d2K-GAxUAAAAAHQAAAAAQDw&biw=1296&bih=654&dpr=1
+https://www.google.com/search?q=girls%20fashion%20poster&udm=2&tbs=rimg:Cbml_1GeadSW7YbLYVX8c5g5SsgIPEAAoAToECAEQAVVxsVc_1wAIA2AIA4AIA&hl=en&sa=X&ved=0CCQQuIIBahcKEwi4yc3j2K-GAxUAAAAAHQAAAAAQBw&biw=1296&bih=654&dpr=1
+
+
+
+// "homepage": "https://ShahShreya29.github.io/E-Commerce-Mern-app",
