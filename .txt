@@ -43,3 +43,15 @@ https://www.google.com/search?q=girls%20fashion%20poster&udm=2&tbs=rimg:Cbml_1Ge
 
 
 // "homepage": "https://ShahShreya29.github.io/E-Commerce-Mern-app",
+
+
+//Work
+--> Static file Change
+--> Formatting 
+--> service file frontend
+--> backend - make function not object
+--> eslint
+--> backend server.js 
+
+--> backend
+cart order product api 

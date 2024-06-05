@@ -17,7 +17,7 @@ function App() {
       <div>
         <Navigation />
       </div>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/:levelOne/:levelTwo/:levelThree" element={<Products />} />
@@ -25,11 +25,15 @@ function App() {
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/account/order" element={<orderList />} />
         <Route path="/account/order/:orderId" element={<OrderDetails />} />
-      </Routes>
+      </Routes> */}
 
       <div>
+        <Products/>
+      {/* <ProductDetails /> */}
         <Footer />
+
       </div>
+      
     </>
   );
 }

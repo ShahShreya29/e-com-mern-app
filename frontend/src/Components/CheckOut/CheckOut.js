@@ -66,8 +66,18 @@ export default function CheckOut() {
               Back
             </Button>
           </Box>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleNext}
+              sx={{ mr: 1 }}
+            >
+              next
+            </Button>
+          </Box>
           <div>
-            {step==2?<Delivery/>:<OrderDetails/>}
+            {step==2?<OrderDetails/>:<Delivery/>}
           </div>
         </React.Fragment>
       )}

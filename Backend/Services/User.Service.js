@@ -1,4 +1,4 @@
-const users = require("../Model/UserModel");
+const users = require("../Model/User.Model");
 
 const UserService = {
   signup: async (user) => {

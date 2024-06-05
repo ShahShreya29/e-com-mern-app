@@ -39,14 +39,12 @@ const MainCarousel = () => {
               <Box
                 height={200}
                 width={200}
-              //  my={4}
+                //  my={4}
                 display="flex"
                 alignItems="center"
                 gap={4}
                 p={2}
-            
                 sx={{ border: "2px solid grey" }}
-        
               >
                 <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv_9HVROtMjfow1rrRXuo_w6JBjWoPkH7HA14ht9-9zlaz3U5SUm-OHYGTJUSF6dwUYxo&usqp=CAU" />
               </Box>
@@ -55,13 +53,12 @@ const MainCarousel = () => {
               <Box
                 height={200}
                 width={200}
-               // my={4}
+                // my={4}
                 display="flex"
                 alignItems="center"
                 gap={4}
                 p={2}
                 sx={{ border: "2px solid grey" }}
-           
               >
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSd76oNe1pS7ujzgXQ-XRhGZFldwivbza5hw&s"
@@ -73,13 +70,12 @@ const MainCarousel = () => {
               <Box
                 height={200}
                 width={200}
-               // my={4}
+                // my={4}
                 display="flex"
                 alignItems="center"
                 gap={4}
                 p={2}
                 sx={{ border: "2px solid grey" }}
-             
               >
                 <img
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSerpeZy0pFWASCZs6gzXwTfLkEg6xWsN3lw&s"
@@ -91,13 +87,12 @@ const MainCarousel = () => {
               <Box
                 height={200}
                 width={200}
-               // my={4}
+                // my={4}
                 display="flex"
                 alignItems="center"
                 gap={4}
                 p={2}
                 sx={{ border: "2px solid grey" }}
-
               >
                 <img
                   src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFPEDyM_BpVnK9K_bxTZN5J5leS3aSdU9txg&s"

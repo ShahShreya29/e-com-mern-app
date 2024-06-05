@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-const HomeSectionCarousel = ({SectionName}) => {
+const HomeSectionCarousel = ({ SectionName }) => {
   const responsive = {
     0: { items: 2 },
     568: { items: 3 },
@@ -29,12 +29,12 @@ const HomeSectionCarousel = ({SectionName}) => {
 
   const items = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item) => (
     <HomeSectionCard />
-  ));                                   
+  ));
 
   return (
     <>
       <div className="relative px-4 lg:px-8 ">
-<h2 className="text-2xl-center font-extrabold py-5">{SectionName}</h2>
+        <h2 className="text-2xl-center font-extrabold py-5">{SectionName}</h2>
         <div className="relative p-5">
           <AliceCarousel
             items={items}
@@ -45,28 +45,30 @@ const HomeSectionCarousel = ({SectionName}) => {
             onSlideChange={syncActiveIndex}
             activeIndex={activeIndex}
           />
-      
-      {activeIndex !== items.length-5  && (   <Button
-            className="z-80"
-            variant="content"
-            sx={{ position: "absolute", top: "10rem", right: "0rem" }}
-            color="black"
-            arial-label="next"
 
-            onClick={slideNext}
-          >
-            <ArrowForwardIosIcon />
-          </Button>)}
-          {activeIndex !== 0  && (  <Button
-            className="z-80"
-            variant="content"
-            sx={{ position: "absolute", top: "10rem", left: "0rem" }}
-            color="black"
-            arial-label="next"
-            onClick={slidePrev}
-          >
-            <ArrowBackIosNewIcon />
-          </Button>
+          {activeIndex !== items.length - 5 && (
+            <Button
+              className="z-80"
+              variant="content"
+              sx={{ position: "absolute", top: "10rem", right: "0rem" }}
+              color="black"
+              arial-label="next"
+              onClick={slideNext}
+            >
+              <ArrowForwardIosIcon />
+            </Button>
+          )}
+          {activeIndex !== 0 && (
+            <Button
+              className="z-80"
+              variant="content"
+              sx={{ position: "absolute", top: "10rem", left: "0rem" }}
+              color="black"
+              arial-label="next"
+              onClick={slidePrev}
+            >
+              <ArrowBackIosNewIcon />
+            </Button>
           )}
         </div>
       </div>

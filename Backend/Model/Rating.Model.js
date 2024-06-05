@@ -22,5 +22,5 @@ const ratingSchema = new mongoose.Schema({
     }
 })
 
-const rating = mongoose.model("rating", ratingSchema)
-module.exports = rating;   
+const Rating = mongoose.model("rating", ratingSchema)
+module.exports = Rating;   

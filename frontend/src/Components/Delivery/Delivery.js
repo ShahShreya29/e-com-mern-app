@@ -3,22 +3,18 @@ import React from "react";
 import Address from "./Address";
 
 const Delivery = () => {
-
   const handleSubmit = (e) => {
-e.preventdefault()
-console.log("address");
-const data = new FormData(e.currentTarget);
-console.log(data);
-const address={
-  name: data.get("name"),
-  Address: data.get("address"),
-  city:data.get("city"),
-  state:data.get("state"),
-  zipCode:data.get("zipCode"),
-  Number:data.get("mobileNo")
-
-
-}
+    const data = new FormData(e.target.value);
+    console.log(data);
+    const address = {
+      name: data.get("name"),
+      Address: data.get("address"),
+      city: data.get("city"),
+      state: data.get("state"),
+      zipCode: data.get("zipCode"),
+      Number: data.get("mobileNo"),
+    };
+    console.log(address);
   };
 
   return (
@@ -83,6 +79,6 @@ const address={
       </div>
     </>
   );
-}; 
+};
 
 export default Delivery;

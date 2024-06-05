@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    discription: {
+    details: {
         type: String,
         required: true
     },
@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
         name: { type: String },
         qty: { type: Number },
     }],
-    img: {
+    image: {
         type: String
     },
     ratings: [{
@@ -52,5 +52,5 @@ const productSchema = new mongoose.Schema({
     }
 })
 
-const product = mongoose.model("product", productSchema)
-module.exports = product;   
+const Product = mongoose.model("product", productSchema)
+module.exports = Product;   
