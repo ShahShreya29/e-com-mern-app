@@ -20,7 +20,7 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { useNavigation } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const navigation = {
   categories: [
@@ -158,7 +158,7 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigation("");
+  const navigate = useNavigate("");
 
   const handleCategory = (category, section, item, close) => {
     navigate(`/${category.id}/${section.id}/${item.id}`);
