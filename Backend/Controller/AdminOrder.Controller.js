@@ -20,7 +20,7 @@ const ConfirmOrder = async (req, res) => {
 };
 
 const ShipOrder = async (req, res) => {
-  const orderId = req.params.orderId;
+  const orderId = await req.params.orderId;
   try {
     const orders = await OrderService.shipOrder(orderId);
     return res.status(200).send(orders);
@@ -30,7 +30,7 @@ const ShipOrder = async (req, res) => {
 };
 
 const DeliverOrder = async (req, res) => {
-  const orderId = req.params.orderId;
+  const orderId = await req.params.orderId;
   try {
     const orders = await OrderService.DeliverOrder(orderId);
     return res.status(200).send(orders);
@@ -40,7 +40,7 @@ const DeliverOrder = async (req, res) => {
 };
 
 const CancelOrder = async (req, res) => {
-  const orderId = req.params.orderId;
+  const orderId = await req.params.orderId;
   try {
     const orders = await OrderService.CancelOrder(orderId);
     return res.status(200).send(orders);
@@ -50,7 +50,7 @@ const CancelOrder = async (req, res) => {
 };
 
 const DeleteOrder = async (req, res) => {
-  const orderId = req.params.orderId;
+  const orderId = await req.params.orderId;
   try {
     const orders = await OrderService.DeleteOrder(orderId);
     return res.status(200).send(orders);

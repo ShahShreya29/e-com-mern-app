@@ -2,13 +2,13 @@ const CartService = require("../Services/Cart.Service");
 const Address = require("../Model/Address.Model");
 const Order = require("../Model/Order.Model");
 
-const CreateOrder = async (user, address) => {
+const CreateOrder = async (user, shippingAddress) => {
   let address;
-  if (address._id) {
-    let isExist = await Address.findById(address._id);
+  if (shippingAddress._id) {
+    let isExist = await Address.findById(shippingAddress._id);
     address = isExist;
   } else {
-    address = new Address(address);
+    address = new Address(shippingAddress);
     address.user = user;
     await address.save();
     user.address.push(address);
@@ -17,8 +17,8 @@ const CreateOrder = async (user, address) => {
 
   const cart = await CartService.FindUserCart(user._id);
   const orderItems = [];
-  for (const item of cart.cartItem) {
-    const orderItem = new orderItems({
+  for (const item of cart.cartItems) {
+    const orderItem = new orderItem({
       price: item.price,
       product: item.product,
       qty: item.qty,
@@ -32,13 +32,13 @@ const CreateOrder = async (user, address) => {
   }
 
   const CreatedOrder = new Order({
-    order,
+    user,
     orderItems,
     totalPrice: cart.totalPrice,
     discountPrice: cart.discountPrice,
     discount: cart.discount,
     totalItem: cart.totalItem,
-    address: cart.address,
+    shippingAddress: address,
   });
 
   const SaveOrder = await CreatedOrder.save();
@@ -108,7 +108,7 @@ const GetAllOrder = async () => {
     .populate({ path: "orderItems", populate: { path: "product" } })
     .lean();
 };
- 
+
 const DeleteOrder = async (orderId) => {
   const order = await findOrderById(orderId);
   await Order.findByIdAndDelete(order._id);

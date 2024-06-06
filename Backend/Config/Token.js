@@ -41,3 +41,32 @@ module.exports = {
     }
   },
 };
+
+
+// // authMiddleware.js
+// const jwt = require('jsonwebtoken');
+// const { refreshToken } = require('../Services/User.Service');
+
+// exports.verifyToken = (req, res, next) => {
+//   const token = req.headers.authorization;
+//   if (!token) return res.status(401).json({ message: 'Unauthorized' });
+
+//   jwt.verify(token, process.env.JWT_KEY, (err, user) => {
+//     if (err) return res.status(403).json({ message: 'Invalid token' });
+//     req.user = user;
+//     next();
+//   });
+// };
+
+// exports.refreshTokenMiddleware = async (req, res, next) => {
+//   const token = req.headers.authorization;
+//   if (!token) return res.status(401).json({ message: 'Unauthorized' });
+
+//   try {
+//     const newToken = await refreshToken(token);
+//     req.newToken = newToken;
+//     next();
+//   } catch (error) {
+//     res.status(403).json({ message: 'Failed to refresh token' });
+//   }
+// };

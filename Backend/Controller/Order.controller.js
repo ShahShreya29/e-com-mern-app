@@ -1,7 +1,7 @@
 const OrderService = require("../Services/Order.Service.js");
 
 const CreateOrders = async (req, res) => {
-  const user = req.user;
+  const user = await req.user;
   try {
     const createOrder = await OrderService.CreateOrder(user, req.body);
     return res.status(200).send(createOrder);
@@ -12,7 +12,7 @@ const CreateOrders = async (req, res) => {
 
 const GetOrder = async (req, res) => {
   try {
-    const GetOrders = await OrderService.GetOrder(req.params.is);
+    const GetOrders = await OrderService.GetOrder(req.params.id);
     return res.status(200).send(GetOrders);
   } catch (error) {
     return res.status(500).send({ error: error.message });
@@ -20,7 +20,7 @@ const GetOrder = async (req, res) => {
 };
 
 const UserOrders = async (req, res) => {
-  const user = req.user;
+  const user = await  req.user;
   try {
     const userOrders = await OrderService.userOrders(user._id);
     return res.status(200).send(userOrders);
@@ -28,8 +28,6 @@ const UserOrders = async (req, res) => {
     return res.status(500).send({ error: error.message });
   }
 };
-
-c;
 
 module.exports = {
   CreateOrders,

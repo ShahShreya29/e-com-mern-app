@@ -1,56 +1,42 @@
-const UserService = require("../Services/User.Service");
+const UserService = require("../Services/User.Service.js");
 const jwt = require("jsonwebtoken");
-const { sendError } = require("../errorHandler");
 require('dotenv').config();
 
 const UserController = {
-  signup: async (req, res) => {
+  signUp: async (req, res) => {
     try {
       const { name, email, password, role } = req.body;
-      const user = await UserService.signup({
-        name,
-        email,
-        password,
-        role,
-      });
+      const user = await UserService.signUp({ name, email, password, role });
       if (user.error) {
-        // return res.status(400).json(user);
-        return sendError(res, "Bad request");
+        return res.status(400).json({ error: "Bad request" });
       }
       res.status(200).json(user);
     } catch (error) {
-      // res.status(500).json({ error: "Internal Server Error" });
-      return sendError(res, "Internal server error");
+      console.error(error);
+      return res.status(500).json({ error: "Internal server error" });
     }
   },
 
-  login: async (req, res) => {
+  signIn: async (req, res) => {
     try {
       const { email, password } = req.body;
-      const user = await UserService.login({ email, password });
+      const user = await UserService.signIn({ email, password });
 
       if (user) {
-        const payload = {
-          id: user.id,
-        };
+        const payload = { id: user.id };
         const accessToken = jwt.sign(payload, process.env.JWT_KEY, {
           expiresIn: "15s",
         });
-        console.log(accessToken);
         const refreshToken = jwt.sign(payload, process.env.JWT_KEY, {
           expiresIn: "1min",
         });
-        // console.log("id",user.id,"emailll",user.email);
-        // const accessToken = await AccessToken(user.id);
-        // console.log(accessToken);
         res.status(200).json({ user, accessToken, refreshToken });
       } else {
-        return sendError(res, "User not found");
-        // res.status(404).json({ error: "User not found" });
+        return res.status(404).json({ error: "User not found" });
       }
     } catch (error) {
-      return sendError(res, "Internal server error");
-      // res.status(500).json({ error: "Internal Server Error" });
+      console.error(error);
+      return res.status(500).json({ error: "Internal server error" });
     }
   },
 
@@ -68,10 +54,51 @@ const UserController = {
         accessToken: newAccessToken,
       });
     } catch (error) {
-      return sendError(res, "Internal server error");
-      // return res.status(500).json({ message: "Internal server error" });
+      console.error(error);
+      return res.status(500).json({ message: "Internal server error" });
     }
   },
 };
 
 module.exports = UserController;
+
+// // userController.js
+// const userService = require("../Services/User.Service.js");
+// const CartService = require("../Services/Cart.Service.js");
+// const upload = require("../Config/Multer.js"); // Import multer configuration
+
+// exports.signUp = async (req, res) => {
+//   try {
+
+//     const user = await userService.signUp({ ...req.body, profile: req.file });
+//     await CartService.CreateCart(user);
+//     res.status(201).json(user);
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// };
+
+// exports.signIn = async (req, res) => {
+//   try {
+//     const profilePic = req.file;
+//     const { email, password } = req.body;
+//     const { accessToken, refreshToken } = await userService.signIn(
+//       email,
+//       password,
+//       profilePic
+//     );
+//     res.json({ accessToken, refreshToken, email, password });
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// };
+
+// exports.refreshToken = async (req, res) => {
+//   try {
+//     const { refreshToken } = req.body;
+//     const accessToken = await userService.refreshToken(refreshToken);
+//     res.json({ accessToken });
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// };
