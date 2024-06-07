@@ -8,7 +8,7 @@ import CheckOut from "./Components/CheckOut/CheckOut";
 import { Routes, Route } from "react-router-dom";
 import OrderDetails from "./Components/CheckOut/OrderDetails";
 import orderList from "./Components/CheckOut/orderList";
-import Navbar from "./Components/Navbar/Navbar"
+import Navbar from "./Components/Navbar/Navbar";
 import SignIn from "./Components/Authentication/SignIn";
 import SignUp from "./Components/Authentication/SignUp";
 
@@ -16,27 +16,26 @@ function App() {
   return (
     <>
       <div>
-
-        <Navbar/>
+        <Navbar />
       </div>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/:levelOne/:levelTwo/:levelThree" element={<Products />} />
+        <Route
+          path="/:LevelOne/:LevelSecond/:LevelThird"
+          element={<Products />}
+        />
         <Route path="/product/productId" element={<ProductDetails />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/account/order" element={<orderList />} />
         <Route path="/account/order/:orderId" element={<OrderDetails />} />
-        <Route path="/signIn" element={<SignIn />}/>
-        <Route path="/signUp" element={<SignUp />}/>
-
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signUp" element={<SignUp />} />
       </Routes>
 
       <div>
         <Footer />
-
       </div>
-      
     </>
   );
 }

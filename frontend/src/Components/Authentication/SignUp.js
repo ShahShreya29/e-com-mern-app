@@ -14,27 +14,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { register } from "../../Redux/Action/authAction";
+import { register } from "../../Redux/User/authAction";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    profilePic: null,
-  });
-
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Name Is Required"),
-    email: Yup.string().email("Invalid email").required("Email Is Required"),
-    password: Yup.string().required("Password Is Required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Password Is Required"),
-  });
 
   const formik = useFormik({
     initialValues: {
@@ -43,20 +27,30 @@ const SignUp = () => {
       password: "",
       confirmPassword: "",
     },
-    validationSchema: validationSchema,
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required("Name Is Required"),
+      email: Yup.string().email("Invalid email").required("Email Is Required"),
+      password: Yup.string().required("Password Is Required"),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .required("Password Is Required"),
+    }),
     onSubmit: (values) => {
-      // Your signup logic here
-      console.log(values);
-      toast.success("Signup successful!");
-      navigate("/signIn");
-      dispatch(register({ name, email, password }))
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("email", values.email);
+      formData.append("password", values.password);
+      formData.append("profilePic", values.profilePic);
+
+      dispatch(register(formData)).then(() => {
+        toast.success("Signup successful!");
+        navigate("/signIn");
+      });
     },
   });
 
-
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData({ ...formData, profilePic: file });
+    formik.setFieldValue("profilePic", e.currentTarget.files[0]);
   };
 
   return (

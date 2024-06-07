@@ -32,7 +32,7 @@ router.post("/:id", auth, OrderController.CreateOrders);
 router.get("/user", auth, OrderController.UserOrders);
 router.get("/:id", auth, OrderController.GetOrder);
 
-router.post("/addProducts", ProductController.AddMultipleProducts);
+router.post(" /addProducts", ProductController.AddMultipleProducts);
 router.post("/addProduct", ProductController.CreateProduct);
 router.delete("/:id", auth, ProductController.DeleteProduct);
 router.put("/:id", auth, ProductController.UpdateProduct);
@@ -44,5 +44,6 @@ router.get("/product/:productId", auth, ReviewController.GetAllReview);
 
 router.post("/addRating", auth, RatingController.CreateRating);
 router.get("/product/:productId", auth, RatingController.GetAllRating);
-
+ 
 module.exports = router;
+ 

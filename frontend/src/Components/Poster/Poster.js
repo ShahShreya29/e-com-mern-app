@@ -13,6 +13,7 @@ import Paper from '@mui/material/Paper';
 import { Posters } from '../../Assets/Assets'; // Ensure the correct path
 import { Poster2 } from '../../Assets/Assets';
 import './Poster.css'
+import { useNavigate } from 'react-router-dom';
 
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -21,6 +22,7 @@ const Poster = () => {
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = Posters.length;
+    const navigate = useNavigate();
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);

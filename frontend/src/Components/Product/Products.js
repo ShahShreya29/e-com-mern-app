@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -21,57 +21,140 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import ProductCard from "./ProductCard";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getProducts } from "../../Redux/Products/Action";
 
-const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
-];
+const color = ["white", "red", "pink", "yellow"];
 
 const filters = [
   {
     id: "color",
-    name: "Color",
-    options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
-    ],
-  },
-  {
-    id: "category",
-    name: "Category",
-    options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
+    name: "color",
+    option: [
+      { value: "white", label: "white" },
+      { value: "red", label: "red" },
+      { value: "pink", label: "pink" },
+      { value: "yellow", label: "yellow" },
     ],
   },
   {
     id: "size",
-    name: "Size",
-    options: [
-      { value: "s", label: "s", checked: false },
-      { value: "m", label: "m", checked: false },
-      { value: "l", label: "l", checked: false },
-      { value: "xl", label: "xl", checked: false },
+    name: "size",
+    option: [
+      { value: "s", label: "s" },
+      { value: "l", label: "l" },
+      { value: "m", label: "m" },
+      { value: "xl", label: "xl" },
     ],
   },
+];
+
+const filters2 = [
+  {
+    id: "price",
+    name: "price",
+    option: [
+      { value: "100-200", label: "100-200" },
+      { value: "200-300", label: "200-300" },
+      { value: "300-400", label: "300-400" },
+      { value: "400-500", label: "400-500" },
+    ],
+  },
+  {
+    id: "discount",
+    name: "discount",
+    option: [
+      { value: "10%", label: "10%" },
+      { value: "20%", label: "20%" },
+      { value: "30%", label: "300-400" },
+      { value: "40%", label: "40%" },
+    ],
+  },
+];
+
+const sortOptions = [
+  // { name: "Most Popular", href: "#", current: true },
+  // { name: "Best Rating", href: "#", current: false },
+  // { name: "Newest", href: "#", current: false },
+  { name: "Price: Low to High", href: "#", current: false },
+  { name: "Price: High to Low", href: "#", current: false },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Products() {
+export default function Products({ product }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const Query = decodeURIComponent(location.search);
+  const searchParams = new URLSearchParams(Query);
+  const colorValue = searchParams.get("color");
+  const sizeValue = searchParams.get("size");
+  const priceValue = searchParams.get("price");
+  const discountValue = searchParams.get("discount");
+  const sortValue = searchParams.get("sort");
+  const pageNumber = searchParams.get("page") || 1;
+  const stock = searchParams.get("stock");
+
+  const params = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+     const [minPrice,maxPrice]=priceValue===null?[0,10]:priceValue.split(" ").map(Number);
+    const data={
+      category: params.LevelThird,
+      colors:colorValue || [],
+      sizes:sizeValue || [],
+      minPrice,
+      maxPrice,
+      minDiscount: discountValue || 0,
+      sort : sortValue || "price_high",
+      pageNumber : pageNumber- 1,
+      pageSize : 10,
+      stock : stock,
+
+    }
+dispatch(getProducts(data))
+    }, [
+    params.LevelThird,
+    colorValue,
+    sizeValue,
+    priceValue,
+    discountValue,
+    sortValue,
+    stock,
+    pageNumber,
+  ]);
+
+  const handelFilter = (value, sectionId) => {
+    const searchParams = new URLSearchParams(location.search);
+    let filterValue = searchParams.getAll(sectionId);
+    if (filterValue.length > 0 && filterValue[0].split(",").includes(value)) {
+      filterValue = filterValue[0].split(",").filter((item) => item !== value);
+      if (filterValue.length === 0) {
+        searchParams.delete(sectionId);
+      }
+    } else {
+      filterValue.push(value);
+    }
+
+    if (filterValue.length > 0) {
+      searchParams.set(sectionId, filterValue.join(","));
+    }
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
+
+  const handleFilter2 = (sectionId, e) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set(sectionId, e.target.value);
+    const query = searchParams.toString();
+    navigate({ search: `?${query}` });
+  };
 
   return (
     <div className="bg-white">
@@ -120,9 +203,69 @@ export default function Products() {
                   {/* Filters */}
                   <form className="mt-4 border-t border-gray-200">
                     <h3 className="sr-only">Categories</h3>
-                  
 
                     {filters.map((section) => (
+                      <Disclosure
+                        as="div"
+                        key={section.id}
+                        className="border-t border-gray-200 px-4 py-6"
+                      >
+                        {({ open }) => (
+                          <>
+                            <h3 className="-mx-2 -my-3 flow-root">
+                              <DisclosureButton className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                <span className="font-medium text-gray-900">
+                                  {section.name}
+                                </span>
+                                <span className="ml-6 flex items-center">
+                                  {open ? (
+                                    <MinusIcon
+                                      className="h-5 w-5"
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <PlusIcon
+                                      className="h-5 w-5"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                </span>
+                              </DisclosureButton>
+                            </h3>
+                            <DisclosurePanel className="pt-6">
+                              <div className="space-y-6">
+                                {section.options.map((option, optionIdx) => (
+                                  <div
+                                    key={option.value}
+                                    className="flex items-center"
+                                  >
+                                    <input
+                                      onChange={() =>
+                                        handelFilter(option.value, section.id)
+                                      }
+                                      id={`filter-mobile-${section.id}-${optionIdx}`}
+                                      name={`${section.id}[]`}
+                                      defaultValue={option.value}
+                                      type="checkbox"
+                                      defaultChecked={option.checked}
+                                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    />
+                                    <label
+                                      htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                      className="ml-3 min-w-0 flex-1 text-gray-500"
+                                    >
+                                      {option.label}
+                                    </label>
+                                  </div>
+                                ))}
+                              </div>
+                            </DisclosurePanel>
+                          </>
+                        )}
+                      </Disclosure>
+                    ))}
+
+                    {filters2.map((section) => (
                       <Disclosure
                         as="div"
                         key={section.id}
@@ -186,7 +329,7 @@ export default function Products() {
           </Dialog>
         </Transition>
 
-        <main className="mx-auto  px-4 sm:px-6 lg:px-20">
+        <main className="mx-auto  px-4 sm:px-6 lg:px-10">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               New Arrivals
@@ -327,7 +470,9 @@ export default function Products() {
               {/* Product grid */}
               <div className="lg:col-span-3 w-full">
                 <div className="flex flex-wrap justify-center py-5">
-                  <ProductCard Product/>
+                  {[1, 2, 3].map((item) => (
+                    <ProductCard product={item} />
+                  ))}
                 </div>
               </div>
             </div>

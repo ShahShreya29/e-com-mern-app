@@ -6,7 +6,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-const HomeSectionCarousel = ({ SectionName }) => {
+const HomeSectionCarousel = ({ SectionName, data }) => {
   const responsive = {
     0: { items: 2 },
     568: { items: 3 },
@@ -27,11 +27,11 @@ const HomeSectionCarousel = ({ SectionName }) => {
     setActiveIndex(item);
   };
 
-  const items = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((item) => (
+  const items = data.map((item) => (
     <HomeSectionCard />
   ));
 
-  return (
+  return (                    
     <>
       <div className="relative px-4 lg:px-8 ">
         <h2 className="text-2xl-center font-extrabold py-5">{SectionName}</h2>
@@ -39,7 +39,6 @@ const HomeSectionCarousel = ({ SectionName }) => {
           <AliceCarousel
             items={items}
             disableButtonsControls
-            infinite
             responsive={responsive}
             disableDotsControls
             onSlideChange={syncActiveIndex}
@@ -62,10 +61,12 @@ const HomeSectionCarousel = ({ SectionName }) => {
             <Button
               className="z-80"
               variant="content"
-              sx={{ position: "absolute", top: "10rem", left: "0rem" }}
+              sx={{ position: "absolute", top: "10rem", left: "0rem" ,}}
+              // display: { xs: 'none' } 
               color="black"
               arial-label="next"
               onClick={slidePrev}
+             
             >
               <ArrowBackIosNewIcon />
             </Button>

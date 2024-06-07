@@ -20,7 +20,7 @@ export default function CheckOut() {
   const location = useLocation();
  const querySearch = new URLSearchParams(location.search)
 
- const step = querySearch.get("step")
+ const steps = querySearch.get("step")
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -30,10 +30,10 @@ export default function CheckOut() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  return (
+  return  (
     <div className="px-10 lg:px-20">
     <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={step}>
+      <Stepper activeStep={steps}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -75,9 +75,9 @@ export default function CheckOut() {
             >
               next
             </Button>
-          </Box>
+          </Box>                              
           <div>
-            {step==2?<OrderDetails/>:<Delivery/>}
+            {steps==2?<OrderDetails/>:<Delivery/>}
           </div>
         </React.Fragment>
       )}

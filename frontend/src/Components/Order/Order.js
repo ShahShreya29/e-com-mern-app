@@ -7,7 +7,8 @@ const Order = () => {
    <Grid container sx={{justifyContent:"space-between"}}>
     <Grid item xs={2.5}>
         <div className='h-auto p-5 sticky top-5'>
-            h1                    
+         <h1>Filters</h1>
+                                                                                           
         </div>
     </Grid>
    </Grid>

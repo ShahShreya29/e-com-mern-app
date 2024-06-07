@@ -21,63 +21,32 @@ export default function ProductCard({ product }) {
         <CardMedia
           sx={{ height: 340 }}
           style={{ objectFit: "cover" }}
-          image="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRZyhIbOyqEQJonGenRWcM-fXajK85MpXawHwycAuBCUtLJvV6QQc3CfRKeYUoGHxCCIk81HuEVoX35k1s5bWbU0tGm51nWwIwH9EFgQkE&usqp=CAE"
+          image={product.image}
           title="green iguana"
         />
         <CardContent className="CardContent">
           <Typography gutterBottom variant="h5" component="div">
-            Dress
+           {product.title}
           </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
             style={{ margin: 5 }}
           >
-            Dillu Fashion Women Ethnic Dress White Dress
+        {   product.details}
           </Typography>
           <Typography style={{ margin: 5 }}>
-            ₹420.0&nbsp;&nbsp;&nbsp;<del>₹920.00</del>
+            ₹{product.price}&nbsp;&nbsp;&nbsp;<del>₹{product.discountPrice}</del>
           </Typography>
 
-          <Typography color={"green"}>30% off</Typography>
+          <Typography color={"green"}>{product.discountPercent}</Typography>
         </CardContent>
         {/* <CardActions>
         <Button size="small">Share</Button>
         <Button size="small">Learn More</Button>
       </CardActions> */}
       </Card>
-      <Card
-        sx={{ maxWidth: 245, margin: 5, cursor: "pointer" }}
-        className="Card"
-      >
-        <CardMedia
-          sx={{ height: 340 }}
-          style={{ objectFit: "cover" }}
-          image="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRZyhIbOyqEQJonGenRWcM-fXajK85MpXawHwycAuBCUtLJvV6QQc3CfRKeYUoGHxCCIk81HuEVoX35k1s5bWbU0tGm51nWwIwH9EFgQkE&usqp=CAE"
-          title="green iguana"
-        />
-        <CardContent className="CardContent">
-          <Typography gutterBottom variant="h5" component="div">
-            Dress
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            style={{ margin: 5 }}
-          >
-            Dillu Fashion Women Ethnic Dress White Dress
-          </Typography>
-          <Typography style={{ margin: 5 }}>
-            ₹420.0&nbsp;&nbsp;&nbsp;<del>₹920.00</del>
-          </Typography>
-
-          <Typography color={"green"}>30% off</Typography>
-        </CardContent>
-        {/* <CardActions>
-      <Button size="small">Share</Button>
-      <Button size="small">Learn More</Button>
-    </CardActions> */}
-      </Card>
+                 
       <Card
         sx={{ maxWidth: 245, margin: 5, cursor: "pointer" }}
         className="Card"
