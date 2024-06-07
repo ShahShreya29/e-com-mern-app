@@ -27,7 +27,7 @@ export const getProducts = (data) => async (dispatch) => {
   } = data;
   try {
     const { data } =await api.get(
-      `/products/color=${color}&size=${sizes}&minPrice=${minPrice}$maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      `/products?color=${color}&size=${sizes}&minPrice=${minPrice}$maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     );
 console.log("product data",data);
     dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data });
